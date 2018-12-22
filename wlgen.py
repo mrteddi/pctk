@@ -3,6 +3,7 @@
 from bs4 import BeautifulSoup
 from googlesearch import search
 from urllib.request import urlopen
+from urllib.error import HTTPError
 import re
 import argparse
 
@@ -32,8 +33,12 @@ f = open(args.o, "w+")
 print("[WLGen] Searching for 'List of ", args.theme, "' in ", args.n, " websites", sep='')
 
 for url in search('List of '+args.theme, num=args.n, stop=args.n):
-    page = urlopen(url)
-    baseUrl = re.search(r'\.(.*?)\.', url).group(1)
+    try:
+        page = urlopen(url)
+        baseUrl = re.search(r'\.(.*?)\.', url).group(1)
+    except HTTPError as e:
+        print(url + " Error: " + str(e.code))
+        continue
     if baseUrl not in urls:
         urls.append(baseUrl)
 

@@ -7,12 +7,12 @@ PCTK (Password Cracking ToolKit) is a small collection of scripts developed to a
 - More coming later.
 
 ### WLGen
-WLGen (Word List Generator).
+wlgen.py (Word List Generator).
 Often passwords have a theme around their passwords and if you have a hint of what that may be, WLGen can help produce a wordlist to use as a dictionary.
 
 Requirements:
 ```
-pip3 install -r requirements
+pip install -r requirements
 ```
 Usage:
 ```
