@@ -7,10 +7,10 @@ from urllib.error import HTTPError
 import re
 import argparse
 
-version = "1.1"
+version = "1.2"
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
-description="WLGen by Conor Moening - Version: " + version)
+description="Written by Conor Moening - Version: " + version)
 
 parser.add_argument('theme', help="Word theme to generate a wordlist for")
 parser.add_argument('-o', default="wordlist.txt", help="File to output wordlist to. (Default: wordlist.txt)")
@@ -30,8 +30,10 @@ def main():
             page = urlopen(url)
             baseUrl = re.search(r'\.(.*?)\.', url).group(1)
         except HTTPError as e:
-            print(url + " Error: " + str(e.code))
+            print( "[WLGen] " + url + " Error: " + str(e.code))
             continue
+        except:
+            print( "[WLGen] Other error" )
         if baseUrl not in urls:
             urls.append(baseUrl)
 
