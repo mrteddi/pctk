@@ -2,7 +2,7 @@
 
 from bs4 import BeautifulSoup
 from googlesearch import search
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 import re
 import argparse
@@ -27,7 +27,7 @@ def main():
 
     for url in search('List of '+args.theme, num=args.n, stop=args.n):
         try:
-            page = urlopen(url)
+            page = urlopen( Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0)'} ) )
             baseUrl = re.search(r'\.(.*?)\.', url).group(1)
         except HTTPError as e:
             print( "[WLGen] " + url + " Error: " + str(e.code))
